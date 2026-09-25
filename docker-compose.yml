@@ -1,0 +1,21 @@
+# docker-compose.yml — authorized local lab targets.
+# OWASP Juice Shop (port 3000) and DVWA (port 80).
+# These are the ONLY targets the lab pipeline is allowed to scan
+# (see scope.lab.yaml). Requires Docker; see scripts/run_lab_pipeline.sh.
+
+name: blueprint-lab
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    container_name: lab-juice-shop
+    ports:
+      - "3000:3000"
+    restart: "no"
+
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: lab-dvwa
+    ports:
+      - "80:80"
+    restart: "no"

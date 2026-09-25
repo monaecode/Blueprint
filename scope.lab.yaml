@@ -1,0 +1,22 @@
+# scope.lab.yaml — pre-authorized scope for the LOCAL Docker lab only.
+# Targets are the Juice Shop and DVWA containers from docker-compose.yml.
+# Never point this at anything outside your own machine.
+
+engagement:
+  client: "Local Lab (self-test)"
+  engagement_id: "LAB-SELFTEST"
+  start_date: "2026-09-19"
+  end_date: "2026-09-19"
+
+targets:
+  - host: "127.0.0.1"
+    ports: [3000, 80]        # 3000 = Juice Shop, 80 = DVWA
+
+exclusions: []
+
+intensity: "standard"
+
+authorization:
+  signed_by: "lab operator (self)"
+  signed_date: "2026-09-19"
+  statement: "Self-authorized scan of local Docker lab containers only."

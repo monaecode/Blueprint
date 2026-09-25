@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Pipeline working files
+.work/
+audit.log
+
+# Generated reports (never commit client reports)
+reports/*.pdf
+reports/*.html
+!reports/.gitkeep
+# ...except the lab self-test sample, which is committed on purpose
+!reports/sample-pentest-report-*.pdf
+
+# Lab / OS noise
+.DS_Store

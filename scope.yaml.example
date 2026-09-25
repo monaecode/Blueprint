@@ -1,0 +1,37 @@
+# scope.yaml — engagement scope for the pentest-report-agent.
+#
+# THE AGENT WILL ONLY SCAN TARGETS LISTED HERE (minus exclusions).
+# Anything else is refused. Copy this file per engagement, e.g.:
+#   cp scope.yaml.example scope.acme-2026-09.yaml
+#
+# intensity: "passive" (no port scanning, recon only) or "standard"
+#            (non-aggressive nmap + safe nuclei templates). Nothing stronger
+#            exists in the MVP — there are no exploit modules by design.
+
+engagement:
+  client: "ACME Corp"
+  engagement_id: "ACME-2026-09-001"
+  start_date: "2026-09-20"
+  end_date: "2026-09-27"
+
+targets:
+  - host: "example.com"      # exact hostname, IP, or CIDR (e.g. "10.0.0.0/24")
+    ports: [80, 443]         # optional; omit to use discovered/default ports
+  - host: "203.0.113.10"
+    ports: [80, 443, 3000]
+
+exclusions:
+  - host: "203.0.113.11"    # never touch, even if inside a target CIDR
+    reason: "production database, out of scope per client"
+
+intensity: "standard"        # passive | standard
+
+# Written authorization is REQUIRED. The CLI refuses to run unless BOTH:
+#   1. --i-am-authorized is passed, AND
+#   2. this section is filled in and signed.
+authorization:
+  signed_by: ""              # e.g. "Jane Doe, CTO, ACME Corp"
+  signed_date: ""            # e.g. "2026-09-19"
+  statement: ""              # e.g. "ACME Corp authorizes automated vulnerability
+                             #       scanning of the targets above, 2026-09-20
+                             #       through 2026-09-27."
